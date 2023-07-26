@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Add your CSS and other head elements here -->
+</head>
+<body>
+<h2>Place Order</h2>
+<div class="container-body">
+    <form th:action="@{/placeOrder}" th:object="${stockOrder}" method="post">
+        <div class="form-group">
+            <label for="stockSymbol">Stock Symbol:</label>
+            <select id="stockSymbol" name="stockSymbol" th:field="*{stock.stockSymbol}" required>
+                <!-- Loop through the available stocks -->
+                <option th:each="stock : ${stocks}" th:value="${stock.stockSymbol}" th:text="${stock.stockSymbol}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" th:field="*{quantity}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" th:field="*{price}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="orderDate">Order Date:</label>
+            <input type="date" id="orderDate" name="orderDate" th:field="*{orderDate}" required/>
+        </div>
+
+        <div class="form-group">
+            <button class="submit-button" type="submit">Place Order</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

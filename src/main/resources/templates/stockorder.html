@@ -167,31 +167,29 @@
         </div>
     </header>
     <main>
-        <h2>Buy Stocks</h2>
+      <h2>Buy Stocks</h2>
       <div class="container-body">
         <form th:action="@{/placeOrder}" th:object="${stockOrder}" method="post">
           <div class="form-group">
-            <div class="left">
-              <label for="stockSymbol">Stock:</label>
-              <select id="stockSymbol" name="stockSymbol" th:field="*{stock.stockSymbol}" required>
-                <!-- Loop through the available stocks -->
-                <option th:each="stock : ${stocks}" th:value="${stock.stockSymbol}" th:text="${stock.stockName}"></option>
-              </select>
-            </div>
-            <div class="right">
-              <label for="stockPrice">Stock Price:</label>
-              <input type="number" id="stockPrice" name="stockPrice" th:value="${stockOrder.stock.stockPrice}" required readonly/>
-            </div>
-          </div>
 
+              <div class="left">
+                <label for="stockSymbol">Stock:</label>
+                <select id="stockSymbol" name="stockSymbol" th:field="*{stockSymbol}" required>
+                  <!-- Loop through the available stocks -->
+                  <option th:each="stock : ${stocks}" th:value="${stock.stockSymbol}"
+                          th:text="${stock.stockSymbol + ' - ' + stock.stockName + ' - Buying Price: $' + stock.stockPrice}"></option>
+                </select>
+              </div>
+            </div>
           <div class="form-group">
             <div class="left">
               <label for="investAmount">Invest Amount:</label>
-              <input type="number" id="investAmount" name="investAmount" th:field="*{investAmount}" required/>
+              <input type="number" id="investAmount" name="investAmount" th:field="*{investAmount}" required />
             </div>
             <div class="right">
               <label for="orderDate">Order Date:</label>
-              <input type="date" id="orderDate" name="orderDate" th:field="*{orderDate}" th:value="${#temporals.format(stockOrder.orderDate, 'yyyy-MM-dd')}" required/>
+              <input type="date" id="orderDate" name="orderDate" th:field="*{orderDate}"
+                     th:value="${#temporals.format(stockOrder.orderDate, 'yyyy-MM-dd')}" required />
             </div>
           </div>
 
@@ -207,18 +205,22 @@
             </div>
             <div class="right">
               <label for="cardNumber">Card Number:</label>
-              <input type="text" id="cardNumber" name="cardNumber" th:field="*{cardNumber}" required/>
+              <input type="text" id="cardNumber" name="cardNumber" th:field="*{cardNumber}" required />
             </div>
           </div>
 
+
+          <!-- Hidden input field to send the user's email to the controller -->
+          <input type="hidden" name="userEmail" th:value="${#authentication.principal.username}" />
+          <!-- Display the user's email in a disabled input field for visual representation -->
           <div class="form-group">
             <div class="left">
-              <label for="nameOnCard">Name on Card:</label>
-              <input type="text" id="nameOnCard" name="nameOnCard" th:field="*{nameOnCard}" required/>
+              <label for="user-email">User Email:</label>
+              <input type="text" id="user-email" name="user-email" th:value="${#authentication.principal.username}" disabled />
             </div>
             <div class="right">
               <label for="address">Billing Address:</label>
-              <input type="text" id="address" name="address" th:field="*{address}" required/>
+              <input type="text" id="address" name="address" th:field="*{address}" required />
             </div>
           </div>
 

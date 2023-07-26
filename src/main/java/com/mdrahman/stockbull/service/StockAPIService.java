@@ -2,6 +2,7 @@ package com.mdrahman.stockbull.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mdrahman.stockbull.model.Stock;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -10,36 +11,69 @@ import org.apache.http.impl.client.HttpClients;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 @Service
 public class StockAPIService {
 
-    private final String apiKey = "8AOVKXSV55DL81TN";
-    private final String alphaVantageEndpoint = "https://www.alphavantage.co/query";
+    private final String apiKey = "pk_a25f6c418b13402a9c20fef3f1fc09d5"; // Replace with your IEX Cloud API key
+    private final String iexCloudEndpoint = "https://cloud.iexapis.com/stable";
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    private JsonNode makeApiCall(String url) throws IOException {
+    public List<Stock> getAllStocks() throws IOException {
+        String function = "search";
+        String keywords = "YOUR_KEYWORD"; // Replace with keywords to search stocks
+        String url = iexCloudEndpoint + "/stock/" + function + "?token=" + apiKey + "&q=" + keywords;
+
+        HttpGet httpGet = new HttpGet(url);
+        HttpResponse response = httpClient.execute(httpGet);
+        HttpEntity entity = response.getEntity();
+
+        List<Stock> stocks = new ArrayList<>();
+
+        if (entity != null) {
+            JsonNode root = objectMapper.readTree(entity.getContent());
+
+            Iterator<JsonNode> matchesIterator = root.elements();
+
+            while (matchesIterator.hasNext()) {
+                JsonNode matchNode = matchesIterator.next();
+                String symbol = matchNode.get("symbol").asText();
+                String name = matchNode.get("name").asText();
+
+                // Fetch stock price using your existing getStockPrice() method (not shown here)
+                double price = getStockPrice(symbol);
+
+                Stock stock = new Stock();
+                stock.setStockSymbol(symbol);
+                stock.setStockName(name);
+                stock.setStockPrice(price);
+
+                stocks.add(stock);
+            }
+        }
+
+        return stocks;
+    }
+
+    public double getStockPrice(String symbol) throws IOException {
+        String function = "quote";
+        String url = iexCloudEndpoint + "/stock/" + symbol + "/" + function + "?token=" + apiKey;
+
         HttpGet httpGet = new HttpGet(url);
         HttpResponse response = httpClient.execute(httpGet);
         HttpEntity entity = response.getEntity();
 
         if (entity != null) {
-            return objectMapper.readTree(entity.getContent());
-        }
+            JsonNode root = objectMapper.readTree(entity.getContent());
 
-        return null;
-    }
-
-    public double getStockPrice(String symbol) throws IOException {
-        String url = alphaVantageEndpoint + "?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=" + apiKey;
-        JsonNode root = makeApiCall(url);
-
-        if (root != null) {
-            JsonNode globalQuoteNode = root.get("Global Quote");
-            if (globalQuoteNode != null) {
-                String priceStr = globalQuoteNode.get("05. price").asText();
-                return Double.parseDouble(priceStr);
+            // Check if the response contains the "latestPrice" field
+            if (root.has("latestPrice")) {
+                double price = root.get("latestPrice").asDouble();
+                return price;
             }
         }
 
@@ -47,30 +81,19 @@ public class StockAPIService {
     }
 
     public String getStockName(String symbol) throws IOException {
-        String url = alphaVantageEndpoint + "?function=SYMBOL_SEARCH&keywords=" + symbol + "&apikey=" + apiKey;
-        JsonNode root = makeApiCall(url);
+        String url = iexCloudEndpoint + "/stock/" + symbol + "/company?token=" + apiKey;
 
-        if (root != null) {
-            JsonNode bestMatchesNode = root.get("bestMatches");
-            if (bestMatchesNode.isArray() && bestMatchesNode.size() > 0) {
-                JsonNode firstMatch = bestMatchesNode.get(0);
-                String companyName = firstMatch.get("2. name").asText();
-                return companyName;
-            }
-        }
+        HttpGet httpGet = new HttpGet(url);
+        HttpResponse response = httpClient.execute(httpGet);
+        HttpEntity entity = response.getEntity();
 
-        return ""; // Return empty string if there's an error or no data found
-    }
+        if (entity != null) {
+            JsonNode root = objectMapper.readTree(entity.getContent());
 
-    public String getStockSymbol(String symbol) throws IOException {
-        String url = alphaVantageEndpoint + "?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=" + apiKey;
-        JsonNode root = makeApiCall(url);
-
-        if (root != null) {
-            JsonNode globalQuoteNode = root.get("Global Quote");
-            if (globalQuoteNode != null) {
-                String stockSymbol = globalQuoteNode.get("01. symbol").asText();
-                return stockSymbol;
+            // Check if the response contains the "companyName" field
+            if (root.has("companyName")) {
+                String stockName = root.get("companyName").asText();
+                return stockName;
             }
         }
 

@@ -10,6 +10,10 @@ import java.util.List;
 @Repository
 public interface StockRepository extends JpaRepository<Stock, Long> {
 
+    @Query("SELECT DISTINCT stock.stockSymbol FROM Stock stock")
+    List<String> findAllStockSymbols();
+
+    // Method to find stock by stock symbol
     Stock findByStockSymbol(String symbol);
 }
 

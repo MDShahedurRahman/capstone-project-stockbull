@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock List</title>
+</head>
+<body>
+<h2>Stock List</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Stock Symbol</th>
+        <th>Stock Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through the list of stocks -->
+    <tr th:each="stock : ${stocks}">
+        <td th:text="${stock.stockSymbol}"></td>
+        <td th:text="${stock.stockPrice}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -26,6 +26,7 @@ public class SecurityConfiguration{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
                 .requestMatchers("/userlist**").hasRole("ADMIN")
+                .requestMatchers("/stocks**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers("/create**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers("/placeOrder**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers("/profile**").hasAnyRole("ADMIN", "USER")

@@ -22,20 +22,14 @@ public class StockOrder {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date orderDate;
-
-    @ManyToOne
-    @JoinColumn(name = "stock_id")
-    private Stock stock;
-
+    private double stockPrice;
+    private String stockSymbol;
     private double investAmount;
     private String cardType;
     private String cardNumber;
-    private String nameOnCard;
+    private String userEmail;
     private String address;
     private String comment;
-
-
-
 
 }
 
