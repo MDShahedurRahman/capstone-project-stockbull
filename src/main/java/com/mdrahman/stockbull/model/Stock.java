@@ -24,8 +24,6 @@ public class Stock {
     private String stockSymbol;
     private double stockPrice;
 
-    // Fields to store historical stock data fetched from Alpha Vantage
-    private String timeSeriesData;
 
     @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL)
     private List<StockOrder> orders = new ArrayList<>();
