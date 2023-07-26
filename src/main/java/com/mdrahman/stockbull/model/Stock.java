@@ -22,16 +22,14 @@ public class Stock {
 
     private String stockName;
     private String stockSymbol;
+    private double stockPrice;
 
     @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL)
     private List<StockOrder> orders = new ArrayList<>();
 
-
-    // Convenience method to add an order to the stock
+    // Convenience method to add a stock order to the stock
     public void addOrder(StockOrder order) {
         orders.add(order);
         order.setStock(this);
     }
-
 }
-
