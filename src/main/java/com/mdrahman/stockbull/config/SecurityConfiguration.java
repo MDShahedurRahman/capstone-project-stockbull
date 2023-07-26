@@ -27,6 +27,7 @@ public class SecurityConfiguration{
         http.authorizeHttpRequests()
                 .requestMatchers("/userlist**").hasRole("ADMIN")
                 .requestMatchers("/create**").hasAnyRole("ADMIN", "USER")
+                .requestMatchers("/placeOrder**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers("/profile**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers("/editprofile**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(

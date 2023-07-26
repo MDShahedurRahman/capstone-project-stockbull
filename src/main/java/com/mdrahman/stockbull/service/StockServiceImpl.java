@@ -29,6 +29,11 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
+    public Stock getStockBySymbol(String stockSymbol) {
+        return stockRepository.findByStockSymbol(stockSymbol);
+    }
+
+    @Override
     public Stock saveStock(Stock stock) {
         // Save the stock entity to the database
         Stock savedStock = stockRepository.save(stock);
