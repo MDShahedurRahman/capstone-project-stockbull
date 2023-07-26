@@ -24,11 +24,11 @@ public class Stock {
     private String stockSymbol;
 
     @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL)
-    private List<Order> orders = new ArrayList<>();
+    private List<StockOrder> orders = new ArrayList<>();
 
 
     // Convenience method to add an order to the stock
-    public void addOrder(Order order) {
+    public void addOrder(StockOrder order) {
         orders.add(order);
         order.setStock(this);
     }

@@ -1,29 +1,29 @@
 package com.mdrahman.stockbull.service;
 
-import com.mdrahman.stockbull.model.Order;
-import com.mdrahman.stockbull.repository.OrderRepository;
+import com.mdrahman.stockbull.model.StockOrder;
+import com.mdrahman.stockbull.repository.StockOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class OrderServiceImpl implements OrderService {
+public class StockOrderServiceImpl implements StockOrderService {
 
     @Autowired
-    private OrderRepository orderRepository;
+    private StockOrderRepository orderRepository;
 
     @Override
-    public List<Order> getAllOrders() {
+    public List<StockOrder> getAllOrders() {
         return orderRepository.findAll();
     }
 
     @Override
-    public Order getOrderById(Long id) {
+    public StockOrder getOrderById(Long id) {
         return orderRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Order saveOrder(Order order) {
+    public StockOrder saveOrder(StockOrder order) {
         return orderRepository.save(order);
     }
 

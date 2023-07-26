@@ -13,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Setter
 @Getter
-public class Order {
+public class StockOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +31,8 @@ public class Order {
     private String cardNumber;
     private String nameOnCard;
     private String address;
+    private String comment;
+
 
 
 
