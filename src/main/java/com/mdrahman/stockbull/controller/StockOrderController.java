@@ -34,3 +34,4 @@ public class StockOrderController {
         return "redirect:/placeOrder"; // Redirect to the order form after submission
     }
 }
+
