@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SignUp-StockBull</title>
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/signup.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Font+Name&display=swap">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  </head>
+  <body>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="home" viewBox="0 0 16 16">
+          <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"></path>
+        </symbol>
+        <symbol id="speedometer2" viewBox="0 0 16 16">
+          <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z"></path>
+          <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z"></path>
+        </symbol>
+        <symbol id="table" viewBox="0 0 16 16">
+          <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"></path>
+        </symbol>
+        <symbol id="people-circle" viewBox="0 0 16 16">
+          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
+          <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"></path>
+        </symbol>
+        <symbol id="grid" viewBox="0 0 16 16">
+          <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"></path>
+        </symbol>
+    </svg>
+    <header>
+        <div class="upper px-3 py-2 border-bottom">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="index.html" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                <img src="/images/logo-light.png" alt="Logo" class="logo" width="95" height="64">
+                <img src="/images/logo-text-white.png" alt="Logo" class="logo" width="160" height="52">
+            </a>
+    
+            <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                <li>
+                <a href="index.html" class="nav-link text-white">
+                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"></use></svg>
+                    Home
+                </a>
+                </li>
+                <li>
+                <a href="transactions.html" class="nav-link text-white">
+                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"></use></svg>
+                    Dashboard
+                </a>
+                </li>
+                <li>
+                <a href="stocks.html" class="nav-link text-white">
+                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"></use></svg>
+                    Invest
+                </a>
+                </li>
+                <li>
+                <a href="transactions.html" class="nav-link text-white">
+                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"></use></svg>
+                    Pricing
+                </a>
+                </li>
+                <li>
+                <a href="login.html" class="nav-link text-white">
+                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
+                    Profile
+                </a>
+                </li>
+            </ul>
+            </div>
+        </div>
+        </div>
+    </header>
+    <main>
+        <div th:if="${param.success}">
+            <div class="alert alert-info">You've successfully registered to StockBull. Please login and start investing!!</div>
+        </div>
+        <div class="background">
+            <h2>Create Account</h2>
+            <div class="box">
+                <form th:action="@{/signup}" th:object="${user}" method="post">
+                    <p class="error-message" th:if="${#fields.hasGlobalErrors()}"
+                       th:each="error : ${#fields.errors('global')}" th:text="${error}">Invalid input</p>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('firstName')}? 'has-error':''">
+                        <label for="firstName" class="control-label">First name</label> <input
+                            id="firstName" class="form-control" th:field="*{firstName}" />
+                        <p class="error-message" th:each="error: ${#fields.errors('firstName')}"
+                           th:text="${error}">Invalid input</p>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('lastName')}? 'has-error':''">
+                        <label for="lastName" class="control-label">Last name</label> <input
+                            id="lastName" class="form-control" th:field="*{lastName}" />
+                        <p class="error-message" th:each="error : ${#fields.errors('lastName')}"
+                           th:text="${error}">Invalid input</p>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
+                        <label for="email" class="control-label">E-mail</label> <input
+                            id="email" class="form-control" th:field="*{email}" />
+                        <p class="error-message"
+                           th:each="error : ${#fields.errors('email')}" th:text="${error}">Invalid input</p>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('confirmEmail')}? 'has-error':''">
+                        <label for="confirmEmail" class="control-label">Confirm
+                            e-mail</label> <input id="confirmEmail" class="form-control"
+                                                  th:field="*{confirmEmail}" />
+                        <p class="error-message"
+                           th:each="error : ${#fields.errors('confirmEmail')}"
+                           th:text="${error}">Invalid input</p>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
+                        <div class="left">
+                        <label for="password" class="control-label">Password</label> <input
+                            id="password" class="form-control" type="password"
+                            th:field="*{password}" />
+                        <p class="error-message"
+                           th:each="error : ${#fields.errors('password')}"
+                           th:text="${error}">Invalid input</p>
+                        </div>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error':''">
+                        <div class="right">
+                        <label for="confirmPassword" class="control-label">Confirm
+                            password</label> <input id="confirmPassword" class="form-control"
+                                                    type="password" th:field="*{confirmPassword}" />
+                        <p class="error-message"
+                           th:each="error : ${#fields.errors('confirmPassword')}"
+                           th:text="${error}">Invalid input</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role:</label>
+                        <select id="role" name="role" class="form-control">
+                            <option value="ROLE_USER">USER</option>
+                            <option value="ROLE_ADMIN">ADMIN</option>
+                        </select>
+                    </div>
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('terms')}? 'has-error':''">
+                        <input id="terms" type="checkbox" th:field="*{terms}" />   <label
+                            class="control-label" for="terms"> I agree with the <a
+                            href="#">terms and conditions</a> for Sign-up.
+                    </label>
+                        <p class="error-message"
+                           th:each="error : ${#fields.errors('terms')}" th:text="${error}">Verification failure! Please check the terms and conditions</p>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Sign-Up</button>
+                        <span>Already registered? <a href="/" th:href="@{/login}">Login
+                       here</a></span>
+                    </div>
+                </form>
+            </div>
+          </div>
+          <div class="container">
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+              <div class="col-md-4 d-flex align-items-center">
+                <a href="index.html" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                  <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+                  <img src="/images/logo-light-white.png" alt="Logo" class="footerlogo" width="75" height="48">
+                </a>
+                <span class="mb-3 mb-md-0 text-body-secondary">© 2023 Stock Bull, Inc</span>
+              </div>
+          
+              <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3"><a class="text-body-secondary" href="https://twitter.com"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg>
+                <img src="/images/icons/twitter.svg" alt="Logo" class="footerlogo" width="24" height="24" style="opacity: 0.3;"></a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="https://www.instagram.com/"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg>
+                <img src="/images/icons/instagram.svg" alt="Logo" class="footerlogo" width="24" height="24" style="opacity: 0.3;"></a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="https://www.facebook.com/"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg>
+                <img src="/images/icons/facebook.svg" alt="Logo" class="footerlogo" width="24" height="24" style="opacity: 0.3;"></a></li>
+              </ul>
+            </footer>
+          </div>       
+    </main>
+    <script src="/scripts/index.js"></script>
+    <script src="/scripts/signup.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+  </body>
+</html>

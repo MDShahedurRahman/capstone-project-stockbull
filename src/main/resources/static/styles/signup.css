@@ -1,0 +1,39 @@
+.box {
+    background-color: #F0F0F0;
+    padding: 30px;
+    margin: 0 250px 20px 250px;
+}
+
+h2 {
+    text-align: center;
+    padding: 20px;
+}
+
+form {
+    /* Remove max-width to allow form fields to align side by side */
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 5px;
+}
+
+.signup-button {
+    display: block;
+    margin: 0 auto;
+    background-color: #0E6FFD;
+
+
+
