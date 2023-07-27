@@ -29,10 +29,13 @@ public class SecurityConfiguration{
                 .requestMatchers("/stocks**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers("/create**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers("/placeOrder**").hasAnyRole("ADMIN", "USER")
-                .requestMatchers("/order**").hasAnyRole("ADMIN", "USER")
+                .requestMatchers("/orderConfirmation**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers("/profile**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers("/editprofile**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers("/showAllOrders**").hasAnyRole("ADMIN", "USER")
+                .requestMatchers("/orderConfirmation**").hasAnyRole("ADMIN", "USER")
+                .requestMatchers("/profile**").hasAnyRole("ADMIN", "USER")
+                .requestMatchers("/trade**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(
                         "/signup**",
                         "/scripts/**",

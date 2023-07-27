@@ -2,6 +2,7 @@ package com.mdrahman.stockbull.controller;
 
 import com.mdrahman.stockbull.model.Stock;
 import com.mdrahman.stockbull.model.StockOrder;
+import com.mdrahman.stockbull.model.User;
 import com.mdrahman.stockbull.service.StockAPIService;
 import com.mdrahman.stockbull.service.StockOrderService;
 import com.mdrahman.stockbull.service.StockService;
@@ -60,16 +61,17 @@ public class StockOrderController {
 
         // Save the order using the StockOrderService
         stockOrderService.saveOrder(stockOrder);
-        return "redirect:/order"; // Redirect to the order confirmation page after submission
+        return "redirect:/orderConfirmation"; // Redirect to the order confirmation page after submission
     }
 
     // Handler method to display the orders for the logged-in user
-    @GetMapping("/order")
+    @GetMapping("/orderConfirmation")
     public String showUserOrders(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName(); // Get the logged-in user's email
         List<StockOrder> userOrders = stockOrderService.getOrdersByEmail(userEmail);
         model.addAttribute("userOrders", userOrders);
+
         return "showorder";
     }
 
@@ -82,11 +84,12 @@ public class StockOrderController {
     }
 
     // Handler method to cancel the order
-    @PostMapping("/order/cancel/{orderId}")
-    public String cancelOrder(@PathVariable Long orderId) {
+    @PostMapping("/order/sell/{orderId}")
+    public String sellStock(@PathVariable Long orderId) {
         // Call the stockOrderService to delete the order by orderId
         stockOrderService.deleteOrderById(orderId);
-        // Redirect to the order list page after canceling the order
+        // Redirect to the order list page after selling the stock
         return "redirect:/showAllOrders";
     }
+
 }
