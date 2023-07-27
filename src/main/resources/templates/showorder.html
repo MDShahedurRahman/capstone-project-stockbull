@@ -1,11 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Transactions-Stock Bull</title>
-    <link rel="stylesheet" href="../static/styles/index.css">
-    <link rel="stylesheet" href="../static/styles/transactions.css">
+    <title>StockBull</title>
+    <link rel="stylesheet" href="/styles/showorder.css">
+    <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Font+Name&display=swap">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   </head>
@@ -34,10 +35,10 @@
           <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
               <a href="index.html" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-                <img src="../static/images/logo-light.png" alt="Logo" class="logo" width="95" height="64">
-                <img src="../static/images/logo-text-white.png" alt="Logo" class="logo" width="160" height="52">
+                <img src="/images/logo-light.png" alt="Logo" class="logo" width="95" height="64">
+                <img src="/images/logo-text-white.png" alt="Logo" class="logo" width="160" height="52">
               </a>
-    
+
               <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
                 <li>
                   <a href="index.html" class="nav-link text-white">
@@ -66,7 +67,7 @@
                 <li>
                   <a href="login.html" class="nav-link text-white">
                     <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
-                    <span id="profile-name">Profile</span>
+                    <span sec:authentication="principal.username">User</span>
                   </a>
                 </li>
               </ul>
@@ -81,7 +82,7 @@
               </button>
               <div class="dropdown-menu" aria-labelledby="investDropdown">
                 <div class="dropdown-content">
-                  <a href="index.html"><img src="../static/images/Invest.png" alt="Left Image" s="left-image" width="450" height="320"></a>
+                  <a href="index.html"><img src="/images/Invest.png" alt="Left Image" s="left-image" width="450" height="320"></a>
                   <div class="vertical-bar"></div>
                   <div class="dropdown-items">
                     <a class="dropdown-item" href="stocks.html">Stocks</a>
@@ -94,14 +95,14 @@
                 </div>
               </div>
             </div>
-        
+
             <div class="dropdown">
               <button class="dropdown-toggle" id="bankDropdown" aria-haspopup="true" aria-expanded="false">
                 Bank
               </button>
               <div class="dropdown-menu" aria-labelledby="bankDropdown">
                 <div class="dropdown-content">
-                  <a href="index.html"><img src="../static/images/Invest.png" alt="Left Image" s="left-image" width="450" height="320"></a>
+                  <a href="index.html"><img src="/images/Invest.png" alt="Left Image" s="left-image" width="450" height="320"></a>
                   <div class="vertical-bar"></div>
                   <div class="dropdown-items">
                     <a class="dropdown-item" href="#">Banking</a>
@@ -134,14 +135,14 @@
                 </div>
               </div>
             </div>
-        
+
             <div class="dropdown">
               <button class="dropdown-toggle" id="featuredDropdown" aria-haspopup="true" aria-expanded="false">
                 Featured
               </button>
               <div class="dropdown-menu" aria-labelledby="featuredDropdown">
                 <div class="dropdown-content">
-                  <a href="index.html"><img src="../static/images/Invest.png" alt="Left Image" s="left-image" width="450" height="320"></a>
+                  <a href="index.html"><img src="/images/Invest.png" alt="Left Image" s="left-image" width="450" height="320"></a>
                   <div class="vertical-bar"></div>
                   <div class="dropdown-items">
                     <a class="dropdown-item" href="#">Thematic Investing</a>
@@ -159,65 +160,62 @@
               <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-2" role="search">
                 <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
               </form>
-              <button type="button" class="btn btn-light text-dark me-2" onclick="window.location.href='login.html'">Login</button>
+              <div>
+                <ul class="nav navbar-nav">
+                  <li sec:authorize="isAuthenticated()">
+                    <button type="button" class="btn btn-light text-dark me-2" th:if="${#authorization.expression('isAuthenticated()')}" th:attr="onclick='location.href=\'' + @{/logout} + '\''">Logout</button>
+                  </li>
+                </ul>
+              </div>
               <button type="button" class="btn btn-primary" onclick="window.location.href='signup.html'">Sign-up</button>
             </div>
           </div>
         </div>
     </header>
     <main>
-      <div class="transaction-title">
-        <h3>Transactions</h3>
-      </div>
-      
-      <div class="clear-button-container">
-        <button id="clearButton" class="clear-button">Clear All</button>
-      </div>
-      
-      <table id="transactionTable">
-        <thead>
-          <tr>
-            <th>Order ID</th>
-            <th>Trading Option</th>
-            <th>Order Date</th>
-            <th>Stock Name</th>
-            <th>Amount Invested</th>
-            <th>Type of Card</th>
-            <th>Name</th>
-            <th>Address</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Transaction rows will be dynamically added here -->
-        </tbody>
-      </table>
       <div class="container">
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-          <div class="col-md-4 d-flex align-items-center">
-            <a href="index.html" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-              <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
-              <img src="../static/images/logo-light-white.png" alt="Logo" class="footerlogo" width="75" height="48">
-            </a>
-            <span class="mb-3 mb-md-0 text-body-secondary">© 2023 Stock Bull, Inc</span>
-          </div>
-      
-          <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <li class="ms-3"><a class="text-body-secondary" href="https://twitter.com"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg>
-            <img src="../static/images/icons/twitter.svg" alt="Logo" class="footerlogo" width="24" height="24" style="opacity: 0.3;"></a></li>
-            <li class="ms-3"><a class="text-body-secondary" href="https://www.instagram.com/"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg>
-            <img src="../static/images/icons/instagram.svg" alt="Logo" class="footerlogo" width="24" height="24" style="opacity: 0.3;"></a></li>
-            <li class="ms-3"><a class="text-body-secondary" href="https://www.facebook.com/"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg>
-            <img src="../static/images/icons/facebook.svg" alt="Logo" class="footerlogo" width="24" height="24" style="opacity: 0.3;"></a></li>
-          </ul>
-        </footer>
-      </div>       
+        <h2>Order Confirmation</h2>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Order Date</th>
+            <th>Stock Symbol</th>
+            <th>Invest Amount</th>
+            <th>Card Type</th>
+            <th>Card Number</th>
+            <th>Address</th>
+            <th>Comment</th>
+            <th>Add/Edit Comment</th>
+          </tr>
+          </thead>
+          <tbody>
+          <!-- Loop through user's orders and display order information in a row -->
+          <tr th:each="order : ${user.orders}">
+            <td th:text="${#DateTimeFormatt(order.orderDate, 'yyyy-MM-dd')}"></td>
+            <td th:text="${order.stockSymbol}"></td>
+            <td th:text="${order.investAmount}"></td>
+            <td th:text="${order.cardType}"></td>
+            <td>************${order.cardNumber.substring(order.cardNumber.length() - 4)}</td>
+            <td th:text="${order.address}"></td>
+            <td>
+              <!-- Display the comment if present, otherwise show "N/A" -->
+              <span th:if="${order.comment}" th:text="${order.comment}"></span>
+              <span th:unless="${order.comment}">N/A</span>
+            </td>
+            <td>
+              <!-- Add/Edit Comment button -->
+              <a th:href="@{/order/add-comment/{orderId}(orderId=${order.id})}" class="btn btn-primary">Add/Edit Comment</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </main>
-    <script src="../static/scripts/index.js"></script>
-    <script src="../static/scripts/login.js"></script>
-    <script src="../static/scripts/stocks.js"></script>
-    <script src="../static/scripts/transactions.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
-  </body>
-</html>
+
+    <script src="/scripts/showorder.js"></script>
+        <script src="/scripts/index.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+      </body>
+    </html>

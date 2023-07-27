@@ -8,5 +8,7 @@ public interface StockOrderService {
     StockOrder getOrderById(Long id);
     StockOrder saveOrder(StockOrder order);
     void deleteOrder(Long id);
+
+    List<StockOrder> getOrdersByEmail(String userEmail);
 }
 

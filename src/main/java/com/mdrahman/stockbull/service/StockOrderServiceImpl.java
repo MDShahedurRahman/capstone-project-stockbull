@@ -31,5 +31,10 @@ public class StockOrderServiceImpl implements StockOrderService {
     public void deleteOrder(Long id) {
         orderRepository.deleteById(id);
     }
+
+    @Override
+    public List<StockOrder> getOrdersByEmail(String userEmail) {
+        return orderRepository.findByUserEmail(userEmail);
+    }
 }
 

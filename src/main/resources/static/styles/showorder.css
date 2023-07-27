@@ -1,0 +1,128 @@
+/* index.css */
+
+main {
+  margin-top: -10px; /* Adjust the negative margin value as needed */
+}
+
+.indexImage {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+
+/* Target the SVG icons by their IDs */
+#home path,
+#speedometer2 path,
+#table path,
+#grid path,
+#people-circle path {
+    fill: white;
+  }
+
+/* Upper Header Background Color */
+.upper.px-3.py-2.border-bottom {
+    background-color: #8c1113;
+  }
+
+/* Lower Header Buttons & Dropdown Menu */
+.btn-lower {
+  background-color: #ffffff;
+  color: #000000; /* Set the text color to black */
+  border: none; /* Remove the border */
+  margin-left: 5px; /* Adjust the left margin */
+  margin-right: 10px; /* Adjust the right margin */
+}
+
+.btn-lower:hover {
+  color: #8c1113; /* Set the text color on hover */
+}
+
+.container {
+  align-items: flex-start; /* Align items to the left */
+}
+
+.container form {
+  margin-left: 80px; /* Adjust the left margin of the search form */
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* Additional styling for Menu*/
+.dropdown-toggle:hover {
+  color: #8c1113;
+}
+
+.dropdown-toggle:focus {
+  outline: none;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  display: none;
+  width: 730px; /* Set a fixed width for the dropdown menu */
+  padding: 5px 0;
+  margin: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+.dropdown-content {
+  display: flex;
+  align-items: center;
+
+}
+
+.left-image {
+  margin-right: 10px; /* Adjust the margin between the image and vertical bar */
+}
+
+.dropdown-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  padding: 10px; /* Add spacing around the dropdown items */
+}
+
+.dropdown-items a {
+  margin-bottom: 5px; /* Add spacing between the dropdown items */
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #333;
+}
+
+.dropdown-menu a:hover {
+  background-color: #ffffff;
+  color: #8c1113;
+  font-weight: bold;
+}
+
+.dropdown.show .dropdown-menu {
+  display: block;
+}
+
+.dropdown-items:before {
+  content: "";
+  border-left: 1px solid #ccc;
+  height: 100%;
+  margin-right: 10px;
+}

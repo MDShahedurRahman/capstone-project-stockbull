@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All User Orders</title>
+</head>
+<body>
+<h2>All User Orders</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Order Date</th>
+        <th>Stock Symbol</th>
+        <th>Stock Price</th>
+        <th>Invest Amount</th>
+        <th>User Email</th>
+        <th>Card Type</th>
+        <th>Card Number</th>
+        <th>Address</th>
+        <th>Comment</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through all orders and display order information in a row -->
+    <tr th:each="order : ${allOrders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${#dates.format(order.orderDate, 'dd-MMM-yyyy')}"></td>
+        <td th:text="${order.stockSymbol}"></td>
+        <td th:text="${order.stockPrice}"></td>
+        <td th:text="${order.investAmount}"></td>
+        <td th:text="${order.userEmail}"></td>
+        <td th:text="${order.cardType}"></td>
+        <td>************${order.cardNumber.substring(order.cardNumber.length() - 4)}</td>
+        <td th:text="${order.address}"></td>
+        <td>
+            <!-- Display the comment if present, otherwise show "N/A" -->
+            <span th:if="${order.comment}" th:text="${order.comment}"></span>
+            <span th:unless="${order.comment}">N/A</span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

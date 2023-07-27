@@ -6,6 +6,8 @@ import com.mdrahman.stockbull.service.StockAPIService;
 import com.mdrahman.stockbull.service.StockOrderService;
 import com.mdrahman.stockbull.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,5 +60,23 @@ public class StockOrderController {
         // Save the order using the StockOrderService
         stockOrderService.saveOrder(stockOrder);
         return "redirect:/order"; // Redirect to the order confirmation page after submission
+    }
+
+    // Handler method to display the orders for the logged-in user
+    @GetMapping("/order")
+    public String showUserOrders(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = authentication.getName(); // Get the logged-in user's email
+        List<StockOrder> userOrders = stockOrderService.getOrdersByEmail(userEmail);
+        model.addAttribute("userOrders", userOrders);
+        return "showorder";
+    }
+
+    // Handler method to display all user data from the StockOrder table
+    @GetMapping("/showAllOrders")
+    public String showAllOrders(Model model) {
+        List<StockOrder> allOrders = stockOrderService.getAllOrders();
+        model.addAttribute("allOrders", allOrders);
+        return "orderlist";
     }
 }
