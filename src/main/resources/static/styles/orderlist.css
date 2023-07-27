@@ -7,28 +7,28 @@
   margin: 20px auto;
   width: 90%;
   border-collapse: collapse;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 #transactionTable th {
   background-color: #f2f2f2;
-  padding: 8px;
   text-align: left;
   font-weight: bold;
   border: 1px solid #ddd;
 }
 
 #transactionTable td {
-  padding: 8px;
   border: 1px solid #ddd;
 }
 
-#transactionTable tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
+
 
 #transactionTable tr:hover {
-  background-color: #eaf6ff;
+  background-color: #f17a47;
+}
+
+#transactionTable tr:1st-child {
+  text-align: center;
 }
 
 /* Clear All button styles */

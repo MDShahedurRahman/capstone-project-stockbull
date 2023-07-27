@@ -28,7 +28,7 @@ public class StockOrderServiceImpl implements StockOrderService {
     }
 
     @Override
-    public void deleteOrder(Long id) {
+    public void deleteOrderById(Long id) {
         orderRepository.deleteById(id);
     }
 

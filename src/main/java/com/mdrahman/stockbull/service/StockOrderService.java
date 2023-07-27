@@ -7,7 +7,7 @@ public interface StockOrderService {
     List<StockOrder> getAllOrders();
     StockOrder getOrderById(Long id);
     StockOrder saveOrder(StockOrder order);
-    void deleteOrder(Long id);
+    void deleteOrderById(Long id);
 
     List<StockOrder> getOrdersByEmail(String userEmail);
 }

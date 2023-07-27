@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.IOException;
@@ -78,5 +79,14 @@ public class StockOrderController {
         List<StockOrder> allOrders = stockOrderService.getAllOrders();
         model.addAttribute("allOrders", allOrders);
         return "orderlist";
+    }
+
+    // Handler method to cancel the order
+    @PostMapping("/order/cancel/{orderId}")
+    public String cancelOrder(@PathVariable Long orderId) {
+        // Call the stockOrderService to delete the order by orderId
+        stockOrderService.deleteOrderById(orderId);
+        // Redirect to the order list page after canceling the order
+        return "redirect:/showAllOrders";
     }
 }

@@ -191,7 +191,7 @@
           <tbody>
           <!-- Loop through user's orders and display order information in a row -->
           <tr th:each="order : ${user.orders}">
-            <td th:text="${#DateTimeFormatt(order.orderDate, 'yyyy-MM-dd')}"></td>
+            <td th:text="${#dates.format(order.orderDate, 'dd-MMM-yyyy')}"></td>
             <td th:text="${order.stockSymbol}"></td>
             <td th:text="${order.investAmount}"></td>
             <td th:text="${order.cardType}"></td>
