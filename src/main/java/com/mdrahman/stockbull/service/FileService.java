@@ -13,7 +13,7 @@ import java.nio.file.StandardCopyOption;
 @Service
 public class FileService {
     //path to the upload dir, Change it as per your computer
-    public String uploadDir = "C:\\Users\\Downloads";
+    public String uploadDir = "/Users/MD/Desktop/Capstone_Project/stockbull/src/main/resources/static/images";
     public void uploadFile(MultipartFile file) {
         try {
             Path copyLocation = Paths.get(uploadDir + File.separator +

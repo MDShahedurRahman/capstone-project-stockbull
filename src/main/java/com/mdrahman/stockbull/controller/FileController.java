@@ -14,21 +14,18 @@ import java.util.Arrays;
 public class FileController {
     @Autowired
     FileService fileService;
-    @GetMapping("/")
-    public String indexPage() {
-        return "upload";
-    }
+
     @PostMapping("/uploadFile")
     public String uploadFile(@RequestParam("file") MultipartFile file,
                              RedirectAttributes redirectAttributes) throws IOException {
         if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute("message", "Please select a file to upload.");
-            return "redirect:/";
+            redirectAttributes.addFlashAttribute("message1", "Please select a file to upload.");
+            return "redirect:/profile";
         }
         else {
             fileService.uploadFile(file);
-            redirectAttributes.addFlashAttribute("message", "You successfully uploaded" + file.getOriginalFilename() + "!, file.");
-            return "redirect:/";
+            redirectAttributes.addFlashAttribute("message2", "You have successfully uploaded. Allow 24 hours to validate!");
+            return "redirect:/profile";
         }
     }
     @PostMapping("/uploadFiles")

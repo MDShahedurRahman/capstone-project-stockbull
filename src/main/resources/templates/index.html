@@ -58,7 +58,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="transactions.html" class="nav-link text-white">
+                  <a th:href="@{transactions.html}" class="nav-link text-white">
                     <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"></use></svg>
                     Dashboard
                   </a>
@@ -76,7 +76,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="profile.html" class="nav-link text-white">
+                  <a th:href="@{/profile}" class="nav-link text-white">
                     <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
                     <span sec:authentication="principal.username">User</span>
                   </a>
@@ -96,12 +96,12 @@
                   <a href="index.html"><img src="/images/Invest.png" alt="Left Image" s="left-image" width="450" height="320"></a>
                   <div class="vertical-bar"></div>
                   <div class="dropdown-items">
-                    <a class="dropdown-item" href="stocks.html">Stocks</a>
+                    <a class="dropdown-item" th:href="@{/placeOrder}">Buy Stocks</a>
                     <a class="dropdown-item" href="stocks.html">ETFs</a>
                     <a class="dropdown-item" href="stocks.html">Crypto</a>
                     <a class="dropdown-item" href="stocks.html">Invest for Retirement</a>
                     <a class="dropdown-item" href="stocks.html">Invest for Kids</a>
-                    <a class="dropdown-item" href="transactions.html">Browse all Investments</a>
+                    <a class="dropdown-item" th:href="@{/showAllOrders}">Browse all Investments</a>
                   </div>
                 </div>
               </div>
@@ -133,7 +133,7 @@
               </button>
               <div class="dropdown-menu" aria-labelledby="learnDropdown">
                 <div class="dropdown-content">
-                  <a href="index.html"><img src="../static/images/Invest.png" alt="Left Image" s="left-image" width="450" height="320"></a>
+                  <a href="index.html"><img src="/images/Invest.png" alt="Left Image" s="left-image" width="450" height="320"></a>
                   <div class="vertical-bar"></div>
                   <div class="dropdown-items">
                     <a class="dropdown-item" href="#">Investing Insights</a>
@@ -141,7 +141,7 @@
                     <a class="dropdown-item" href="#">Retirement</a>
                     <a class="dropdown-item" href="#">The Basics</a>
                     <a class="dropdown-item" href="#">Media</a>
-                    <a class="dropdown-item" href="#">Stock Bull Live</a>
+                    <a class="dropdown-item" th:href="@{/userlist}">Show All Users</a>
                   </div>
                 </div>
               </div>

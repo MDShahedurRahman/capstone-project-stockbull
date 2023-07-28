@@ -36,6 +36,7 @@ public class SecurityConfiguration{
                 .requestMatchers("/orderConfirmation**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers("/profile**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers("/trade**").hasAnyRole("ADMIN", "USER")
+                .requestMatchers("/uploadFile**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(
                         "/signup**",
                         "/scripts/**",

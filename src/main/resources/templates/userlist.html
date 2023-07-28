@@ -216,13 +216,33 @@
             <form th:method="delete" th:action="@{/userlist/delete-user/{id}(id=${user.id})}" style="flex: 1;">
               <!-- Add a hidden input field with the CSRF token for security -->
               <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-              <button type="submit" class="btn btn-danger" style="width: 100%;">Delete</button>
+              <button type="submit" class="btn btn-danger" style="width: 100%;" >Delete</button>
             </form>
           </div>
         </td>
       </tr>
       </tbody>
     </table>
+  </div>
+  <div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <a href="index.html" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+          <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+          <img src="/images/logo-light-white.png" alt="Logo" class="footerlogo" width="75" height="48">
+        </a>
+        <span class="mb-3 mb-md-0 text-body-secondary">© 2023 Stock Bull, Inc</span>
+      </div>
+
+      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3"><a class="text-body-secondary" href="https://twitter.com"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg>
+          <img src="/images/icons/twitter.svg" alt="Logo" class="footerlogo" width="24" height="24" style="opacity: 0.3;"></a></li>
+        <li class="ms-3"><a class="text-body-secondary" href="https://www.instagram.com/"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg>
+          <img src="/images/icons/instagram.svg" alt="Logo" class="footerlogo" width="24" height="24" style="opacity: 0.3;"></a></li>
+        <li class="ms-3"><a class="text-body-secondary" href="https://www.facebook.com/"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg>
+          <img src="/images/icons/facebook.svg" alt="Logo" class="footerlogo" width="24" height="24" style="opacity: 0.3;"></a></li>
+      </ul>
+    </footer>
   </div>
 </main>
 

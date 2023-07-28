@@ -172,9 +172,46 @@
           </div>
         </div>
     </header>
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"></a></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+  {
+  "symbols": [
+    {
+      "proName": "FOREXCOM:SPXUSD",
+      "title": "S&P 500"
+    },
+    {
+      "proName": "FOREXCOM:NSXUSD",
+      "title": "US 100"
+    },
+    {
+      "description": "Tesla",
+      "proName": "NASDAQ:TSLA"
+    },
+    {
+      "description": "Apple",
+      "proName": "NASDAQ:AAPL"
+    },
+    {
+      "description": "Meta",
+      "proName": "NASDAQ:META"
+    }
+  ],
+  "colorTheme": "light",
+  "isTransparent": false,
+  "showSymbolLogo": true,
+  "locale": "en"
+}
+  </script>
+    </div>
+    <!-- TradingView Widget END -->
     <main>
-      <div class="container">
-        <h2>Order Confirmation</h2>
+      <div class="container" style="padding-top: 20px;">
+        <h4>Order Confirmation</h4>
+        <div class="order-table" style="padding-top: 20px;">
         <table class="table">
           <thead>
           <tr>
@@ -210,6 +247,27 @@
           </tr>
           </tbody>
         </table>
+        </div>
+      </div>
+      <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+          <div class="col-md-4 d-flex align-items-center">
+            <a href="index.html" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+              <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+              <img src="/images/logo-light-white.png" alt="Logo" class="footerlogo" width="75" height="48">
+            </a>
+            <span class="mb-3 mb-md-0 text-body-secondary">© 2023 Stock Bull, Inc</span>
+          </div>
+
+          <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-body-secondary" href="https://twitter.com"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg>
+              <img src="/images/icons/twitter.svg" alt="Logo" class="footerlogo" width="24" height="24" style="opacity: 0.3;"></a></li>
+            <li class="ms-3"><a class="text-body-secondary" href="https://www.instagram.com/"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg>
+              <img src="/images/icons/instagram.svg" alt="Logo" class="footerlogo" width="24" height="24" style="opacity: 0.3;"></a></li>
+            <li class="ms-3"><a class="text-body-secondary" href="https://www.facebook.com/"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg>
+              <img src="/images/icons/facebook.svg" alt="Logo" class="footerlogo" width="24" height="24" style="opacity: 0.3;"></a></li>
+          </ul>
+        </footer>
       </div>
     </main>
 
