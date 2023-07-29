@@ -9,7 +9,8 @@ public interface StockService {
     List<Stock> getAllStocks();
     Stock getStockById(Long id);
     Stock saveStock(Stock stock);
-    
+    void clearAllStocks();
+
     void deleteStock(Long id);
 
     Stock getStockBySymbol(String stockSymbol);

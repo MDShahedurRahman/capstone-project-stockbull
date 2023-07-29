@@ -4,12 +4,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>StockBull</title>
-  <link rel="stylesheet" href="/styles/profile.css">
+  <title>StockBull-userlist</title>
   <link rel="stylesheet" href="/styles/index.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Font+Name&display=swap">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -35,38 +33,38 @@
   <div class="upper px-3 py-2 border-bottom">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="index.html" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+        <a th:href="@{/}" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
           <img src="/images/logo-light.png" alt="Logo" class="logo" width="95" height="64">
           <img src="/images/logo-text-white.png" alt="Logo" class="logo" width="160" height="52">
         </a>
 
         <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
           <li>
-            <a href="index.html" class="nav-link text-white">
+            <a th:href="@{/}" class="nav-link text-white">
               <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"></use></svg>
               Home
             </a>
           </li>
           <li>
-            <a href="transactions.html" class="nav-link text-white">
+            <a th:href="@{/dashboard}" class="nav-link text-white">
               <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"></use></svg>
               Dashboard
             </a>
           </li>
           <li>
-            <a href="stocks.html" class="nav-link text-white">
+            <a th:href="@{/placeOrder}" class="nav-link text-white">
               <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"></use></svg>
               Invest
             </a>
           </li>
           <li>
-            <a href="transactions.html" class="nav-link text-white">
+            <a th:href="@{/pricing}" class="nav-link text-white">
               <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"></use></svg>
               Pricing
             </a>
           </li>
           <li>
-            <a href="login.html" class="nav-link text-white">
+            <a th:href="@{/profile}" class="nav-link text-white">
               <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
               <span sec:authentication="principal.username">User</span>
             </a>
@@ -86,12 +84,12 @@
             <a href="index.html"><img src="/images/Invest.png" alt="Left Image" s="left-image" width="450" height="320"></a>
             <div class="vertical-bar"></div>
             <div class="dropdown-items">
-              <a class="dropdown-item" href="stocks.html">Stocks</a>
+              <a class="dropdown-item" th:href="@{/placeOrder}">Buy Stocks</a>
               <a class="dropdown-item" href="stocks.html">ETFs</a>
               <a class="dropdown-item" href="stocks.html">Crypto</a>
               <a class="dropdown-item" href="stocks.html">Invest for Retirement</a>
-              <a class="dropdown-item" href="stocks.html">Invest for Kids</a>
-              <a class="dropdown-item" href="transactions.html">Browse all Investments</a>
+              <a class="dropdown-item" th:href="@{/orderConfirmation}">Recent Orders</a>
+              <a class="dropdown-item" th:href="@{/showAllOrders}">Browse all Investments</a>
             </div>
           </div>
         </div>
@@ -123,7 +121,7 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="learnDropdown">
           <div class="dropdown-content">
-            <a href="index.html"><img src="../static/images/Invest.png" alt="Left Image" s="left-image" width="450" height="320"></a>
+            <a href="index.html"><img src="/images/Invest.png" alt="Left Image" s="left-image" width="450" height="320"></a>
             <div class="vertical-bar"></div>
             <div class="dropdown-items">
               <a class="dropdown-item" href="#">Investing Insights</a>
@@ -131,7 +129,7 @@
               <a class="dropdown-item" href="#">Retirement</a>
               <a class="dropdown-item" href="#">The Basics</a>
               <a class="dropdown-item" href="#">Media</a>
-              <a class="dropdown-item" href="#">Stock Bull Live</a>
+              <a class="dropdown-item" th:href="@{/userlist}">Show All Users</a>
             </div>
           </div>
         </div>
@@ -146,8 +144,8 @@
             <a href="index.html"><img src="/images/Invest.png" alt="Left Image" s="left-image" width="450" height="320"></a>
             <div class="vertical-bar"></div>
             <div class="dropdown-items">
-              <a class="dropdown-item" href="#">Thematic Investing</a>
-              <a class="dropdown-item" href="#">Starter Kit</a>
+              <a class="dropdown-item" th:href="@{/stocks/create}">Add New Stock</a>
+              <a class="dropdown-item" th:href="@{/stocks}">Show All Stocks</a>
               <a class="dropdown-item" href="#">Stock Slices</a>
               <a class="dropdown-item" href="#">Indexing</a>
               <a class="dropdown-item" href="#">Retirement Income</a>
@@ -156,7 +154,9 @@
           </div>
         </div>
       </div>
-      <button type="button" class="btn-lower" onclick="window.location.href = 'transactions.html'">Transactions</button>
+      <a th:href="@{/showAllOrders}">
+        <button type="button" class="btn-lower">Transactions</button>
+      </a>
       <div class="text-end d-flex align-items-center">
         <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-2" role="search">
           <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
@@ -168,17 +168,15 @@
             </li>
           </ul>
         </div>
-        <button type="button" class="btn btn-primary" onclick="window.location.href='signup.html'">Sign-up</button>
+        <button type="button" class="btn btn-primary">Sign-up</button>
       </div>
     </div>
   </div>
 </header>
 <main>
-  <div class="container">
-    <br>
+  <div class="container" style="padding-top: 20px;">
     <h4>User Profile List</h4>
-    <br>
-    <div class="search-container">
+    <div class="search-container" style="padding-top: 20px;">
       <!-- Search input and button -->
       <form th:action="@{/userlist/search}" method="post">
         <div class="input-group mb-3">

@@ -47,5 +47,10 @@ public class StockServiceImpl implements StockService {
         stockRepository.deleteById(id);
     }
 
+    @Override
+    public void clearAllStocks() {
+        stockRepository.deleteAll();
+    }
+
 
 }

@@ -126,3 +126,8 @@ main {
   height: 100%;
   margin-right: 10px;
 }
+
+.custom-width {
+    width: 99.5%; /* Adjust the width value as needed */
+    margin: 0 auto; /* This will horizontally center the div */
+}

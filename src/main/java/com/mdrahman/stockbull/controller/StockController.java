@@ -6,10 +6,7 @@ import com.mdrahman.stockbull.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -58,5 +55,11 @@ public class StockController {
         stockService.saveStock(stock);
 
         return "redirect:/stocks"; // Redirect to the list of stocks after creating the stock
+    }
+
+    @PostMapping("/clearAll")
+    public String clearAllStocks() {
+        stockService.clearAllStocks();
+        return "redirect:/stocks"; // Redirect back to the stock list page
     }
 }

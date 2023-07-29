@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Optional;
 
@@ -35,9 +36,10 @@ public class TradeController {
                             @RequestParam double currentPrice,
                             @RequestParam double investedAmount,
                             Model model) {
+        Double investedStockPrice = 1.0; //Just a placeholder. This calculation will be done later
 
         // Calculate Total Equity based on the current updated price
-        double totalEquity = currentPrice * investedAmount;
+        double totalEquity = currentPrice/investedStockPrice * investedAmount;
 
         // Pass the necessary attributes to the template
         model.addAttribute("stockSymbol", stockSymbol);
@@ -49,7 +51,7 @@ public class TradeController {
     }
 
 
-    // Method to handle selling an order
+
     @DeleteMapping("/sell")
     public String sellOrder(@RequestParam Long orderId) {
         logger.info("Received sell request for orderId: {}", orderId);
@@ -60,7 +62,6 @@ public class TradeController {
         if (orderOptional.isPresent()) {
             // If the order exists, delete it from the database
             stockOrderRepository.delete(orderOptional.get());
-
             // Redirect to the order confirmation page after selling
             return "redirect:/orderConfirmation";
         } else {
@@ -68,4 +69,5 @@ public class TradeController {
             return "redirect:/error"; // For example, redirect to an error page
         }
     }
+
 }

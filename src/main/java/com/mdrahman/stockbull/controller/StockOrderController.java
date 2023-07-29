@@ -11,12 +11,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -99,6 +99,29 @@ public class StockOrderController {
         stockOrderService.deleteOrderById(orderId);
         // Redirect to the order list page after selling the stock
         return "redirect:/showAllOrders";
+    }
+
+
+    @PostMapping("/showAllOrders/search")
+    public String searchOrderByDate(@RequestParam("searchText") String searchText, Model model) {
+        List<StockOrder> searchResults;
+
+        if (searchText.contains("@")) {
+            searchResults = stockOrderService.getOrdersByEmail(searchText);
+            model.addAttribute("userOrders", searchResults);
+        } else {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date orderDate = sdf.parse(searchText);
+                searchResults = stockOrderService.getOrdersByOrderDate(orderDate);
+                model.addAttribute("userOrders", searchResults);
+            } catch (ParseException e) {
+                // Handle parsing exception (if the date format is incorrect)
+                e.printStackTrace();
+                // You can add an error message to the model to display it in the view
+            }
+        }
+        return "showorder";
     }
 
 }

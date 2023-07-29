@@ -35,5 +35,17 @@ input[type="password"] {
     margin: 0 auto;
     background-color: #0E6FFD;
 
+    .btn-custom {
+      width: 150px; /* Set the desired button width */
+      background-color: blue; /* Change the button color to blue */
+      color: white; /* Set the text color to white */
+      margin-right: 10px; /* Adjust the value to add space between the button and span text */
+    }
+
+    /* Style the span text */
+    .text-span {
+      margin-left: 10px; /* Adjust the value to add space between the button and span text */
+    }
+
 
 

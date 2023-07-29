@@ -39,6 +39,8 @@ public class SecurityConfiguration{
                 .requestMatchers("/uploadFile**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers(
                         "/signup**",
+                        "/dashboard**",
+                        "/pricing**",
                         "/scripts/**",
                         "/styles/**",
                         "/images/**",

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SignUp-StockBull</title>
+    <title>StockBull-signup</title>
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/signup.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Font+Name&display=swap">
@@ -76,7 +76,7 @@
     </header>
     <main>
         <div th:if="${param.success}">
-            <div class="alert alert-info">You've successfully registered to StockBull. Please login and start investing!!</div>
+            <div class="alert alert-info"><span class="text-span">You've successfully registered to StockBull. Please <a href="/" th:href="@{/login}">Login</a></span> and start investing!!</div>
         </div>
         <div class="background">
             <h2>Create Account</h2>
@@ -85,36 +85,34 @@
                     <p class="error-message" th:if="${#fields.hasGlobalErrors()}"
                        th:each="error : ${#fields.errors('global')}" th:text="${error}">Invalid input</p>
                     <div class="form-group" th:classappend="${#fields.hasErrors('firstName')}? 'has-error':''">
-                        <label for="firstName" class="control-label">First name</label> <input
-                            id="firstName" class="form-control" th:field="*{firstName}" />
+                        <label for="firstName" class="control-label">First name</label>
+                        <input id="firstName" type="text" class="form-control" th:field="*{firstName}" />
                         <p class="error-message" th:each="error: ${#fields.errors('firstName')}"
                            th:text="${error}">Invalid input</p>
                     </div>
                     <div class="form-group" th:classappend="${#fields.hasErrors('lastName')}? 'has-error':''">
-                        <label for="lastName" class="control-label">Last name</label> <input
-                            id="lastName" class="form-control" th:field="*{lastName}" />
+                        <label for="lastName" class="control-label">Last name</label>
+                        <input id="lastName" type="text" class="form-control" th:field="*{lastName}" />
                         <p class="error-message" th:each="error : ${#fields.errors('lastName')}"
                            th:text="${error}">Invalid input</p>
                     </div>
                     <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
-                        <label for="email" class="control-label">E-mail</label> <input
-                            id="email" class="form-control" th:field="*{email}" />
+                        <label for="email" class="control-label">E-mail</label>
+                        <input id="email" type="email" class="form-control" th:field="*{email}" />
                         <p class="error-message"
                            th:each="error : ${#fields.errors('email')}" th:text="${error}">Invalid input</p>
                     </div>
                     <div class="form-group" th:classappend="${#fields.hasErrors('confirmEmail')}? 'has-error':''">
-                        <label for="confirmEmail" class="control-label">Confirm
-                            e-mail</label> <input id="confirmEmail" class="form-control"
-                                                  th:field="*{confirmEmail}" />
+                        <label for="confirmEmail" class="control-label">Confirm e-mail</label>
+                        <input id="confirmEmail" type="email" class="form-control" th:field="*{confirmEmail}" />
                         <p class="error-message"
                            th:each="error : ${#fields.errors('confirmEmail')}"
                            th:text="${error}">Invalid input</p>
                     </div>
                     <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
                         <div class="left">
-                        <label for="password" class="control-label">Password</label> <input
-                            id="password" class="form-control" type="password"
-                            th:field="*{password}" />
+                        <label for="password" class="control-label">Password</label>
+                            <input id="password" class="form-control" type="password" th:field="*{password}" />
                         <p class="error-message"
                            th:each="error : ${#fields.errors('password')}"
                            th:text="${error}">Invalid input</p>
@@ -122,9 +120,8 @@
                     </div>
                     <div class="form-group" th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error':''">
                         <div class="right">
-                        <label for="confirmPassword" class="control-label">Confirm
-                            password</label> <input id="confirmPassword" class="form-control"
-                                                    type="password" th:field="*{confirmPassword}" />
+                        <label for="confirmPassword" class="control-label">Confirm password</label>
+                            <input id="confirmPassword" class="form-control" type="password" th:field="*{confirmPassword}" />
                         <p class="error-message"
                            th:each="error : ${#fields.errors('confirmPassword')}"
                            th:text="${error}">Invalid input</p>
@@ -133,8 +130,8 @@
                     <div class="form-group">
                         <label for="role">Role:</label>
                         <select id="role" name="role" class="form-control">
-                            <option value="ROLE_USER">USER</option>
-                            <option value="ROLE_ADMIN">ADMIN</option>
+                            <option value="ROLE_USER">User</option>
+                            <option value="ROLE_ADMIN">Admin</option>
                         </select>
                     </div>
                     <div class="form-group"
@@ -147,9 +144,15 @@
                            th:each="error : ${#fields.errors('terms')}" th:text="${error}">Verification failure! Please check the terms and conditions</p>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success">Sign-Up</button>
-                        <span>Already registered? <a href="/" th:href="@{/login}">Login
-                       here</a></span>
+                        <div class="d-flex justify-content-center" style="padding-top: 20px;">
+                            <button type="submit" class="btn btn-custom" style="background-color: rgb(26, 115, 232); color: white; width: 300px;"
+                                    onmouseover="this.style.backgroundColor='rgb(0, 71, 171)'"
+                                    onmouseout="this.style.backgroundColor='rgb(26, 115, 232)'"> Sign-Up
+                            </button>
+                        </div>
+                        <div class="d-flex justify-content-center" style="margin-right: 20px; padding-top: 20px;" >
+                            <span class="text-span">Already registered? <a href="/" th:href="@{/login}">Login here</a></span>
+                        </div>
                     </div>
                 </form>
             </div>

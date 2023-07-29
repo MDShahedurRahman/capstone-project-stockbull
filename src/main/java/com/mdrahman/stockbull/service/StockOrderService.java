@@ -1,6 +1,8 @@
 package com.mdrahman.stockbull.service;
 
 import com.mdrahman.stockbull.model.StockOrder;
+
+import java.util.Date;
 import java.util.List;
 
 public interface StockOrderService {
@@ -10,5 +12,7 @@ public interface StockOrderService {
     void deleteOrderById(Long id);
 
     List<StockOrder> getOrdersByEmail(String userEmail);
+    List<StockOrder> getOrdersByOrderDate(Date orderDate);
+
 }
 
