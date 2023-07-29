@@ -25,6 +25,7 @@ public class UserProfileController {
         this.userService = userService; // Initialize the UserService field
     }
 
+    // Handler method to show the list of all users
     @GetMapping("/userlist")
     public String showUserList(Model model) {
         // Fetch user information from the database using UserRepository
@@ -33,6 +34,7 @@ public class UserProfileController {
         return "userlist";
     }
 
+    // Handler method to display the user's profile page
     @GetMapping("/profile")
     public String showUserProfile(Model model) {
         // Fetch the logged-in user's email from the security context
@@ -51,6 +53,7 @@ public class UserProfileController {
         return "profile";
     }
 
+    // Handler method to show the edit profile form for a specific user
     @GetMapping("profile/edit/{id}")
     public String showEditProfileForm(@PathVariable("id") Long id, Model model) {
         // Find the user with the given id
@@ -67,6 +70,7 @@ public class UserProfileController {
         }
     }
 
+    // Handler method to save the updated user profile
     @PostMapping("/save-profile")
     public String saveUserProfile(@ModelAttribute("user") User updatedUser) {
         // Fetch the existing user data from the database using the user ID
@@ -88,6 +92,7 @@ public class UserProfileController {
         }
     }
 
+    // Handler method to delete a user from the user list
     @DeleteMapping("/userlist/delete-user/{id}")
     public String deleteUser(@PathVariable Long id) {
         // Check if the user exists in the database
@@ -105,7 +110,7 @@ public class UserProfileController {
         return "redirect:/userlist";
     }
 
-    // Combined search method
+    // Combined search method for searching users by email or first name
     @PostMapping("/userlist/search")
     public String searchUsers(@RequestParam("searchText") String searchText, Model model) {
         List<User> searchResults;
@@ -120,6 +125,4 @@ public class UserProfileController {
         model.addAttribute("users", searchResults);
         return "userlist";
     }
-
 }
-

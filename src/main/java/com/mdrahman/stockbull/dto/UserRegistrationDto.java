@@ -1,12 +1,15 @@
 package com.mdrahman.stockbull.dto;
 
-
-
-
 import com.mdrahman.stockbull.validator.FieldMatch;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+
+/**
+ * FieldMatch is a custom validation annotation used to ensure that certain fields in the DTO match.
+ * The annotation is applied to the class and contains a list of @FieldMatch annotations,
+ * each specifying two fields that should have the same value.
+ */
 
 @FieldMatch.List({
         @FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match"),
@@ -39,6 +42,7 @@ public class UserRegistrationDto {
 
     private String role;
 
+    // Getters and Setters for the fields
     public String getRole() {
         return role;
     }

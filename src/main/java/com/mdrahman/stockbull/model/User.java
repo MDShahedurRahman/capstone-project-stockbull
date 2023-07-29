@@ -23,15 +23,16 @@ public class User {
     private String email;
     private String password;
 
+    // Many-to-Many relationship with Role entity
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"))
+            name = "users_roles", // Name of the join table in the database
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), // Foreign key column name in join table (User)
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id") // Foreign key column name in join table (Role)
+    )
     private Collection<Role> roles;
 
+    // Constructors
 
     public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
@@ -53,6 +54,8 @@ public class User {
         this.lastName = lastName;
         this.email = email;
     }
+
+    // toString method to display user information (excluding password)
 
     @Override
     public String toString() {

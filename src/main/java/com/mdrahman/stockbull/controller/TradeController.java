@@ -8,10 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import java.util.Optional;
 
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,24 +21,24 @@ public class TradeController {
     private final Logger logger = LoggerFactory.getLogger(TradeController.class);
 
     private final JdbcTemplate jdbcTemplate;
-
     private final StockOrderRepository stockOrderRepository;
 
+    @Autowired
     public TradeController(StockOrderRepository stockOrderRepository, JdbcTemplate jdbcTemplate) {
         this.stockOrderRepository = stockOrderRepository;
         this.jdbcTemplate = jdbcTemplate;
     }
 
-
+    // Handler method to display the trade page
     @GetMapping("/trade")
     public String tradePage(@RequestParam String stockSymbol,
                             @RequestParam double currentPrice,
                             @RequestParam double investedAmount,
                             Model model) {
-        Double investedStockPrice = 1.0; //Just a placeholder. This calculation will be done later
+        Double investedStockPrice = 1.0; // Just a placeholder. This calculation will be done later
 
         // Calculate Total Equity based on the current updated price
-        double totalEquity = currentPrice/investedStockPrice * investedAmount;
+        double totalEquity = currentPrice / investedStockPrice * investedAmount;
 
         // Pass the necessary attributes to the template
         model.addAttribute("stockSymbol", stockSymbol);
@@ -47,14 +46,14 @@ public class TradeController {
         model.addAttribute("investedAmount", investedAmount);
         model.addAttribute("totalEquity", totalEquity);
 
-        return "trade";
+        return "trade"; // Return the name of the view to display the trade page
     }
 
-
-
+    // Handler method to sell an order
     @DeleteMapping("/sell")
     public String sellOrder(@RequestParam Long orderId) {
         logger.info("Received sell request for orderId: {}", orderId);
+
         // Retrieve the order from the database using the orderId
         Optional<StockOrder> orderOptional = stockOrderRepository.findById(orderId);
 
@@ -63,11 +62,10 @@ public class TradeController {
             // If the order exists, delete it from the database
             stockOrderRepository.delete(orderOptional.get());
             // Redirect to the order confirmation page after selling
-            return "redirect:/orderConfirmation";
+            return "redirect:/orderConfirmation"; // Return the name of the view to display the order confirmation page
         } else {
             // If the order does not exist, handle the error or redirect to an error page
             return "redirect:/error"; // For example, redirect to an error page
         }
     }
-
 }

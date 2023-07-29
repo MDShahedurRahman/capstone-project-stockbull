@@ -22,20 +22,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
+    // Autowired UserRepository
     @Autowired
     private UserRepository userRepository;
 
+    // Autowired RoleRepository
     @Autowired
     private RoleRepository roleRepository;
 
+    // Autowired BCryptPasswordEncoder
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public User findByEmail(String email){
-
+    // Find a user by their email address.
+    public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
+    // Save a new user registration to the database.
     public User save(UserRegistrationDto registration) {
         User user = new User();
         user.setFirstName(registration.getFirstName());
@@ -56,23 +60,28 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-
+    // Load user details by their email address for Spring Security authentication.
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
-        if (user == null){
+        if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-        return new org.springframework.security.core.userdetails.User(user.getEmail(),
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(),
                 user.getPassword(),
-                mapRolesToAuthorities(user.getRoles()));
+                mapRolesToAuthorities(user.getRoles())
+        );
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
+    // Map roles to Spring Security authorities.
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
     }
+
+    // Delete a user by their unique ID.
     @Override
     public void deleteUser(Long id) {
         User userToDelete = userRepository.findById(id).orElse(null);
@@ -84,14 +93,13 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    // Search for users by their email address, returning a list of matching users.
     public List<User> searchByEmail(String email) {
         return userRepository.findByEmailContainingIgnoreCase(email);
     }
 
+    // Search for users by their first name, returning a list of matching users.
     public List<User> searchByFirstName(String firstName) {
         return userRepository.findByFirstNameContainingIgnoreCase(firstName);
     }
 }
-
-
-

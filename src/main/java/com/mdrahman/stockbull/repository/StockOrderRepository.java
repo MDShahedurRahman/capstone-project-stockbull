@@ -10,10 +10,15 @@ import java.util.List;
 @Repository
 public interface StockOrderRepository extends JpaRepository<StockOrder, Long> {
 
+    // Custom query to find all stock orders by user email
     List<StockOrder> findByUserEmail(String userEmail);
+
+    // Custom query to find all stock orders by order date
     List<StockOrder> findByOrderDate(Date orderDate);
+
+    // Custom query to find all stock orders by stock symbol
     List<StockOrder> findByStockSymbol(String stockSymbol);
 
+    // Custom query to get the stock price by stock symbol
     double getStockPriceByStockSymbol(String stockSymbol);
 }
-

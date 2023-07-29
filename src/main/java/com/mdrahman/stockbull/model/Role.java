@@ -18,9 +18,12 @@ public class Role {
     @Column(nullable=false, unique = true)
     private String name;
 
+    // Constructor with only 'name' parameter
     public Role(String name) {
         this.name = name;
     }
+
+    // toString method to display role information
 
     @Override
     public String toString() {
@@ -30,5 +33,3 @@ public class Role {
                 '}';
     }
 }
-
-
