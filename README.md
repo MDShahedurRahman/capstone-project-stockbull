@@ -13,5 +13,6 @@ in a user-friendly and visually appealing manner. It involved including: HTML, C
 let's experience the StockBull, A Stock Trading App in action with a LIVE demo!
 
 Project Demo Link: https://www.youtube.com/watch?v=UNIDqBLpNME&t=125s
+
 Project Website: https://www.stockbull.us
 
